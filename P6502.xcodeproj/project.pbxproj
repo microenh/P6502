@@ -6,14 +6,31 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		4D76E7182D64E43B00A7F48C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D76E6F62D64E41200A7F48C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D76E6FD2D64E41200A7F48C;
+			remoteInfo = P6502;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		4D76E6FE2D64E41200A7F48C /* P6502.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P6502.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D76E7142D64E43B00A7F48C /* P6502Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = P6502Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DC040DA2D6511AA003C1CE8 /* P6502.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = P6502.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4D76E7002D64E41200A7F48C /* P6502 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = P6502;
+			sourceTree = "<group>";
+		};
+		4D76E7152D64E43B00A7F48C /* P6502Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = P6502Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -26,13 +43,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4D76E7112D64E43B00A7F48C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		4D76E6F52D64E41200A7F48C = {
 			isa = PBXGroup;
 			children = (
+				4DC040DA2D6511AA003C1CE8 /* P6502.xctestplan */,
 				4D76E7002D64E41200A7F48C /* P6502 */,
+				4D76E7152D64E43B00A7F48C /* P6502Tests */,
 				4D76E6FF2D64E41200A7F48C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				4D76E6FE2D64E41200A7F48C /* P6502.app */,
+				4D76E7142D64E43B00A7F48C /* P6502Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +97,29 @@
 			productReference = 4D76E6FE2D64E41200A7F48C /* P6502.app */;
 			productType = "com.apple.product-type.application";
 		};
+		4D76E7132D64E43B00A7F48C /* P6502Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D76E71A2D64E43B00A7F48C /* Build configuration list for PBXNativeTarget "P6502Tests" */;
+			buildPhases = (
+				4D76E7102D64E43B00A7F48C /* Sources */,
+				4D76E7112D64E43B00A7F48C /* Frameworks */,
+				4D76E7122D64E43B00A7F48C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D76E7192D64E43B00A7F48C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4D76E7152D64E43B00A7F48C /* P6502Tests */,
+			);
+			name = P6502Tests;
+			packageProductDependencies = (
+			);
+			productName = P6502Tests;
+			productReference = 4D76E7142D64E43B00A7F48C /* P6502Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +132,10 @@
 				TargetAttributes = {
 					4D76E6FD2D64E41200A7F48C = {
 						CreatedOnToolsVersion = 16.2;
+					};
+					4D76E7132D64E43B00A7F48C = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 4D76E6FD2D64E41200A7F48C;
 					};
 				};
 			};
@@ -100,12 +154,20 @@
 			projectRoot = "";
 			targets = (
 				4D76E6FD2D64E41200A7F48C /* P6502 */,
+				4D76E7132D64E43B00A7F48C /* P6502Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4D76E6FC2D64E41200A7F48C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D76E7122D64E43B00A7F48C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +184,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4D76E7102D64E43B00A7F48C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4D76E7192D64E43B00A7F48C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D76E6FD2D64E41200A7F48C /* P6502 */;
+			targetProxy = 4D76E7182D64E43B00A7F48C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4D76E70B2D64E41400A7F48C /* Debug */ = {
@@ -297,6 +374,40 @@
 			};
 			name = Release;
 		};
+		4D76E71B2D64E43B00A7F48C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 566Y4FXUU7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.microenh.P6502Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/P6502.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/P6502";
+			};
+			name = Debug;
+		};
+		4D76E71C2D64E43B00A7F48C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 566Y4FXUU7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.microenh.P6502Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/P6502.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/P6502";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -314,6 +425,15 @@
 			buildConfigurations = (
 				4D76E70E2D64E41400A7F48C /* Debug */,
 				4D76E70F2D64E41400A7F48C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D76E71A2D64E43B00A7F48C /* Build configuration list for PBXNativeTarget "P6502Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D76E71B2D64E43B00A7F48C /* Debug */,
+				4D76E71C2D64E43B00A7F48C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

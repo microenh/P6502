@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "129CD846-7221-4418-AFE3-DF33E61DB98C",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:P6502.xcodeproj",
+      "identifier" : "4D76E6FD2D64E41200A7F48C",
+      "name" : "P6502"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:P6502.xcodeproj",
+        "identifier" : "4D76E7132D64E43B00A7F48C",
+        "name" : "P6502Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
