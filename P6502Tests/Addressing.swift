@@ -107,4 +107,14 @@ struct Addressing {
         p.memory[0x0100] = 0x34
         #expect(p.address(mode: .indirectIndexed, base: 0xff) == 0x3466)
     }
+    
+    /*
+    @Test
+    mutating func branch() {
+        p.pc = 0x8000
+        p.branch(flag: true, offset: 0x10)
+        let r = p.registers
+        #expect(r.pc == 0x8010)
+    }
+     */
 }
