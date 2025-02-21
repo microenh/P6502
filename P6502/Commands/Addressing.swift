@@ -41,11 +41,7 @@ extension Model6502 {
         case .indirectIndexed:
             return Int(memory[Int(base)]) | (Int(memory[Int(base) + 1]) << 8) + Int(y)
         case .relative:
-            return Int(pc) + Int(base) - 128
+            return Int(pc) + Int(Model6502.twosComplement(value: UInt8(truncatingIfNeeded: base)))
         }
-    }
-    
-    mutating func branch(flag: Bool, offset: UInt16) {
-        pc = UInt16(address(mode: .relative, base: (flag ? offset : 0)))
-    }
+    }    
 }

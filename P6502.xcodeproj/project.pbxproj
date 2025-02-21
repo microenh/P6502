@@ -22,30 +22,9 @@
 		4DC040DA2D6511AA003C1CE8 /* P6502.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = P6502.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		4D13E85B2D68D690001166AF /* Exceptions for "P6502" folder in "P6502Tests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Branch.swift,
-			);
-			target = 4D76E7132D64E43B00A7F48C /* P6502Tests */;
-		};
-		4D13E85C2D68D69C001166AF /* Exceptions for "P6502" folder in "P6502" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Branch.swift,
-			);
-			target = 4D76E6FD2D64E41200A7F48C /* P6502 */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4D76E7002D64E41200A7F48C /* P6502 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				4D13E85C2D68D69C001166AF /* Exceptions for "P6502" folder in "P6502" target */,
-				4D13E85B2D68D690001166AF /* Exceptions for "P6502" folder in "P6502Tests" target */,
-			);
 			path = P6502;
 			sourceTree = "<group>";
 		};

@@ -46,8 +46,14 @@ struct Model6502 {
         }
     }
     
-   static func zeroNegativeFlags(value: UInt8) -> (zero: Bool, negative: Bool) {
+    
+    static func zeroNegativeFlags(value: UInt8) -> (zero: Bool, negative: Bool) {
         (zero: value == 0x00, negative: value >= 0x80)
+    }
+    
+    static func twosComplement(value: UInt8) -> Int8 {
+        value <= 0x80 ? Int8(truncatingIfNeeded: value) :
+        -Int8(truncatingIfNeeded: (~value + 1))
     }
     
     var a: UInt8 {

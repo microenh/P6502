@@ -80,5 +80,12 @@ struct Load {
         #expect(r.n)
     }
     
-
+    @Test func twosComplement() async throws {
+        #expect(Model6502.twosComplement(value: 0x00) == 0x00)
+        #expect(Model6502.twosComplement(value: 0x01) == 0x01)
+        #expect(Model6502.twosComplement(value: 0x79) == 0x79)
+        #expect(Model6502.twosComplement(value: 0x80) == -128)
+        #expect(Model6502.twosComplement(value: 0x81) == -127)
+        #expect(Model6502.twosComplement(value: 0xff) == -1)
+    }
 }
