@@ -13,19 +13,17 @@ struct AND {
 
     @Test
     mutating func and() {
-        p.a = 0xff
+        p.registers.a = 0xff
         p.and(value: 0x00)
-        var r = p.registers
-        #expect(r.a == 0x00)
-        #expect(r.z)
-        #expect(!r.n)
+        #expect(p.registers.a == 0x00)
+        #expect(p.registers.z)
+        #expect(!p.registers.n)
 
-        p.a = 0xff
+        p.registers.a = 0xff
         p.and(value: 0x80)
-        r = p.registers
-        #expect(r.a == 0x80)
-        #expect(!r.z)
-        #expect(r.n)
+        #expect(p.registers.a == 0x80)
+        #expect(!p.registers.z)
+        #expect(p.registers.n)
     }
 
 }

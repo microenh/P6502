@@ -9,9 +9,9 @@ import Foundation
 
 extension Model6502 {
     mutating func bit(value: UInt8) {
-        let r = a & value
-        z = r == 0
-        o = r & 0x40 > 0
-        n = r & 0x80 > 0
+        let r = registers.a & value
+        registers.z = r == 0
+        registers.o = r & 0x40 > 0
+        registers.n = r & 0x80 > 0
     }
 }

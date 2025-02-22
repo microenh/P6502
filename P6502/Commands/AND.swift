@@ -9,6 +9,6 @@ import Foundation
 
 extension Model6502 {
     mutating func and(value: UInt8) {
-        a &= value
+        registers.a &= value
     }
 }

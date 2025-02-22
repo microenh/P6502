@@ -13,7 +13,7 @@ struct BIT {
     
     @Test
     mutating func bit() {
-        p.a = 0x80
+        p.registers.a = 0x80
         p.bit(value: 0x80)
         let r = p.registers
         #expect(!r.z)
@@ -23,7 +23,7 @@ struct BIT {
     
     @Test
     mutating func bit1() {
-        p.a = 0xc0
+        p.registers.a = 0xc0
         p.bit(value: 0xc0)
         let r = p.registers
         #expect(!r.z)
@@ -33,7 +33,7 @@ struct BIT {
     
     @Test
     mutating func bit2() {
-        p.a = 0x00
+        p.registers.a = 0x00
         p.bit(value: 0xc0)
         let r = p.registers
         #expect(r.z)

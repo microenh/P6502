@@ -7,41 +7,42 @@
 
 import Foundation
 
-enum RegisterAddressMode {
-    case zeroPage
-    case zeroPageX
-    case zeroPageY
-    case absolute
-    case absoluteX
-    case absoluteY
-    case indexedIndirect
-    case indirectIndexed
-    case relative
-}
-
 extension Model6502 {
-    func address(mode: RegisterAddressMode, base: UInt16) -> Int {
-        switch mode {
-        case .zeroPage:
-            return Int(base)
-        case .zeroPageX:
-            return Int(UInt8(truncatingIfNeeded: Int(base) + Int(x)))
-        case .zeroPageY:
-            return Int(UInt8(truncatingIfNeeded: Int(base) + Int(y)))
-        case .absolute:
-            return Int(base)
-        case .absoluteX:
-            return Int(UInt16(truncatingIfNeeded: Int(base) + Int(x)))
-        case .absoluteY:
-            return Int(UInt16(truncatingIfNeeded: Int(base) + Int(y)))
-        case .indexedIndirect:
-            let mem1 = Int(UInt8(truncatingIfNeeded: Int(base) + Int(x)))
-            let addrH = memory[Int(UInt8(truncatingIfNeeded: mem1 + 1))]
-            return Int(memory[Int(mem1)]) | (Int(addrH) << 8)
-        case .indirectIndexed:
-            return Int(memory[Int(base)]) | (Int(memory[Int(base) + 1]) << 8) + Int(y)
-        case .relative:
-            return Int(pc) + Int(Model6502.twosComplement(value: UInt8(truncatingIfNeeded: base)))
-        }
-    }    
+    func zeroPage(base: UInt8) -> Int {
+        Int(base)
+    }
+    
+    func zeroPageX(base: UInt8) -> Int {
+        Int(UInt8(truncatingIfNeeded: Int(base) + Int(registers.x)))
+    }
+    
+    func zeroPageY(base: UInt8) -> Int {
+        Int(UInt8(truncatingIfNeeded: Int(base) + Int(registers.y)))
+    }
+    
+    func absolute(base: UInt16) -> Int {
+        Int(base)
+    }
+    
+    func absoluteX(base: UInt16) -> Int {
+        Int(UInt16(truncatingIfNeeded: Int(base) + Int(registers.x)))
+    }
+    
+    func absoluteY(base: UInt16) -> Int {
+        Int(UInt16(truncatingIfNeeded: Int(base) + Int(registers.y)))
+    }
+    
+    func indexedIndirect(base: UInt8) -> Int {
+        let mem1 = Int(UInt8(truncatingIfNeeded: Int(base) + Int(registers.x)))
+        let addrH = memory[Int(UInt8(truncatingIfNeeded: mem1 + 1))]
+        return Int(memory[Int(mem1)]) | (Int(addrH) << 8)
+    }
+    
+    func indirectIndexed(base: UInt8) -> Int {
+        Int(memory[Int(base)]) | (Int(memory[Int(base) + 1]) << 8) + Int(registers.y)
+    }
+    
+    func relative(offset: UInt8) -> UInt16 {
+        UInt16(Int(registers.pc) + Int(P6502.twosComplement(value: offset)))
+    }
 }
