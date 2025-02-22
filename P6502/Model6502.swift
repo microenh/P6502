@@ -48,7 +48,28 @@ struct Model6502 {
                 (z, n) = zeroNegativeFlags(value: newValue)
             }
         }
+        
+        var flags: UInt8 {
+            get {(c ? 0x01 : 0)
+                | (z ? 0x02 : 0)
+                | (i ? 0x04 : 0)
+                | (d ? 0x08 : 0)
+                | (b ? 0x10 : 0)
+                | 0x20
+                | (o ? 0x40 : 0)
+                | (n ? 0x80 : 0)}
+            set {
+                c = newValue & 0x01 == 0x01
+                z = newValue & 0x02 == 0x02
+                i = newValue & 0x04 == 0x04
+                d = newValue & 0x08 == 0x08
+                b = newValue & 0x10 == 0x10
+                o = newValue & 0x40 == 0x40
+                n = newValue & 0x80 == 0x80
+            }
+        }
     }
     
     var registers = Registers()
+    
 }
