@@ -35,5 +35,29 @@ struct JmpJsr {
         p.jmpIndirect(addr: 0x03ff)
         #expect(p.registers.pc == 0x9080)
     }
+    
+    @Test
+    mutating func jsr() {
+        p.registers.sp = 0x02
+        p.registers.pc = 0xb004
+        p.jsr(addr: 0xc004)
+        
+        #expect(p.memory[0x102] == 0x05)
+        #expect(p.memory[0x103] == 0xb0)
+        #expect(p.registers.sp == 0x04)
+        #expect(p.registers.pc == 0xc004)
+    }
 
+    @Test
+    mutating func rts()  {
+        p.registers.sp = 0x04
+        p.registers.pc = 0xc004
+        p.memory[0x0102] = 0x05
+        p.memory[0x0103] = 0xb0
+        p.rts()
+        #expect(p.registers.pc == 0xb006)
+        #expect(p.registers.sp == 0x02)
+        
+    }
+    
 }

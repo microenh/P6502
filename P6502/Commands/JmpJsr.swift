@@ -23,4 +23,15 @@ extension Model6502 {
                                   | (Int(memory[Int(addr) + 1]) << 8))
         }
     }
+    
+    mutating func jsr(addr: UInt16) {
+        let oldPC = UInt16(truncatingIfNeeded: registers.pc + 1)
+        push(value: UInt8(oldPC & 0xff))
+        push(value: UInt8((oldPC & 0xff00) >> 8))
+        registers.pc = addr
+    }
+    
+    mutating func rts() {
+        registers.pc = UInt16(truncatingIfNeeded: (Int(pop()) << 8) + Int(pop()) + 1)
+    }
 }
