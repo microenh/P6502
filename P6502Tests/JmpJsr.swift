@@ -38,33 +38,33 @@ struct JmpJsr {
     
     @Test
     mutating func jsr() {
-        p.registers.sp = 0x02
+        p.registers.sp = 0xff
         p.registers.pc = 0xb004
         p.jsr(addr: 0xc004)
         
-        #expect(p.memory[0x102] == 0x05)
-        #expect(p.memory[0x103] == 0xb0)
-        #expect(p.registers.sp == 0x04)
+        #expect(p.memory[0x01ff] == 0x05)
+        #expect(p.memory[0x01fe] == 0xb0)
+        #expect(p.registers.sp == 0xfd)
         #expect(p.registers.pc == 0xc004)
     }
 
     @Test
     mutating func rts()  {
-        p.registers.sp = 0x04
+        p.registers.sp = 0xfd
         p.registers.pc = 0xc004
-        p.memory[0x0102] = 0x05
-        p.memory[0x0103] = 0xb0
+        p.memory[0x01ff] = 0x05
+        p.memory[0x01fe] = 0xb0
         p.rts()
         #expect(p.registers.pc == 0xb006)
-        #expect(p.registers.sp == 0x02)
+        #expect(p.registers.sp == 0xff)
     }
     
     @Test
     mutating func rti() {
-        p.registers.sp = 0x04
-        p.memory[0x103] = 0b0010_0011
-        p.memory[0x102] = 0xb0
-        p.memory[0x101] = 0x01
+        p.registers.sp = 0xfc
+        p.memory[0x01fd] = 0b0010_0011
+        p.memory[0x01fe] = 0xb0
+        p.memory[0x01ff] = 0x01
         p.rti()
         #expect(p.registers.pc == 0xb001)
         #expect(p.registers.c)

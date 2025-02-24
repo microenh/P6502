@@ -16,7 +16,7 @@ struct BRK {
         p.memory[0xfffe] = 0x02
         p.memory[0xffff] = 0xc0
         p.registers.pc = 0x1234
-        p.registers.sp = 0x02
+        p.registers.sp = 0xff
         p.registers.c = true
         p.registers.z = false
         p.registers.i = false
@@ -26,10 +26,10 @@ struct BRK {
         p.registers.n = false
         p.brk()
         #expect(p.registers.pc == 0xc002)
-        #expect(p.registers.sp == 0x05)
-        #expect(p.memory[0x0102] == 0x34)
-        #expect(p.memory[0x0103] == 0x12)
-        #expect(p.memory[0x0104] == 0x21)
+        #expect(p.registers.sp == 0xfc)
+        #expect(p.memory[0x01ff] == 0x34)
+        #expect(p.memory[0x01fe] == 0x12)
+        #expect(p.memory[0x01fd] == 0x21)
         #expect(p.registers.c)
         #expect(!p.registers.z)
         #expect(!p.registers.i)
