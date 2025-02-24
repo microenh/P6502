@@ -17,4 +17,20 @@ extension Model6502 {
         registers.sp = UInt8(truncatingIfNeeded: Int(registers.sp) - 1)
         return memory[0x0100 + Int(registers.sp)]
     }
+    
+    mutating func pha() {
+        push(value: registers.a)
+    }
+    
+    mutating func pla() {
+        registers.a = pop()
+    }
+    
+    mutating func php() {
+        push(value: registers.flags)
+    }
+    
+    mutating func plp() {
+        registers.flags = pop()
+    }
 }
