@@ -57,7 +57,19 @@ struct JmpJsr {
         p.rts()
         #expect(p.registers.pc == 0xb006)
         #expect(p.registers.sp == 0x02)
-        
+    }
+    
+    @Test
+    mutating func rti() {
+        p.registers.sp = 0x04
+        p.memory[0x103] = 0b0010_0011
+        p.memory[0x102] = 0xb0
+        p.memory[0x101] = 0x01
+        p.rti()
+        #expect(p.registers.pc == 0xb001)
+        #expect(p.registers.c)
+        #expect(p.registers.z)
+        #expect(!p.registers.n)
     }
     
 }

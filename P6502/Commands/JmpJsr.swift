@@ -34,4 +34,9 @@ extension Model6502 {
     mutating func rts() {
         registers.pc = UInt16(truncatingIfNeeded: (Int(pop()) << 8) + Int(pop()) + 1)
     }
+    
+    mutating func rti() {
+        registers.flags = pop()
+        registers.pc = UInt16(truncatingIfNeeded: (Int(pop()) << 8) | Int(pop()))
+    }
 }
