@@ -1,5 +1,5 @@
 //
-//  AND.swift
+//  AndOra.swift
 //  P6502Tests
 //
 //  Created by Mark Erbaugh on 2/21/25.
@@ -26,4 +26,18 @@ struct AND {
         #expect(p.registers.n)
     }
 
+    @Test
+    mutating func ora() {
+        p.registers.a = 0xff
+        p.ora(value: 0x00)
+        #expect(p.registers.a == 0xff)
+        #expect(!p.registers.z)
+        #expect(p.registers.n)
+
+        p.registers.a = 0x00
+        p.ora(value: 0x80)
+        #expect(p.registers.a == 0x80)
+        #expect(!p.registers.z)
+        #expect(p.registers.n)
+    }
 }
