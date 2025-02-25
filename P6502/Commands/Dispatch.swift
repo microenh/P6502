@@ -9,7 +9,7 @@ import Foundation
 
 enum OpCode6502: UInt8 {
     case brk = 0x00
-    case oraIndirectIndexed = 0x01
+    case oraIndexedIndirect = 0x01
     case oraZeroPage = 0x05
     case aslZeroPage = 0x06
     case php = 0x08
@@ -17,6 +17,15 @@ enum OpCode6502: UInt8 {
     case aslA = 0x0a
     case oraAbsolute = 0x0d
     case aslAbsolute = 0x0e
+    //
+    case bpl = 0x10
+    case oraIndirectIndexed = 0x11
+    case oraZeroPageX = 0x15
+    case aslZeroPageX = 0x16
+    case clc = 0x18
+    case oraAbsoluteY = 0x19
+    case oraAbsoluteX = 0x1d
+    case aslAbsoluteX = 0x1e
 }
 
 extension Model6502 {
@@ -28,16 +37,21 @@ extension Model6502 {
         return mem
     }
     
+    mutating func getWord() -> UInt16 {
+        UInt16(getByte()) | ((UInt16(getByte()) << 8))
+    }
+    
     func cycleDelay(cycles: UInt8) {
     }
     
     mutating func dispatchLoop() {
+        extraCycles = 0
         func dispatch(opCode: OpCode6502) {
             switch opCode {
             case .brk:
                 brk()
                 cycleDelay(cycles: 7)
-            case .oraIndirectIndexed:
+            case .oraIndexedIndirect:
                 ora(value: memory[indexedIndirect(base: getByte())])
                 cycleDelay(cycles: 6)
             case .oraZeroPage:
@@ -57,14 +71,40 @@ extension Model6502 {
                 registers.a = asl(value: registers.a)
                 cycleDelay(cycles: 2)
             case .oraAbsolute:
-                ora(value: memory[Int(getByte()) | (Int(getByte()) << 8)])
+                ora(value: memory[Int(getWord())])
                 cycleDelay(cycles: 4)
             case .aslAbsolute:
-                let addr = Int(getByte()) | (Int(getByte()) << 8)
+                let addr = Int(getWord())
                 memory[addr] = asl(value: memory[addr])
                 cycleDelay(cycles: 6)
-            //default:
-            //    break
+                //
+            case .bpl:
+                bpl(offset: getByte())
+                cycleDelay(cycles: 2)
+            case .oraIndirectIndexed:
+                ora(value: memory[indirectIndexed(base: getByte())])
+                cycleDelay(cycles: 5)
+            case .oraZeroPageX:
+                ora(value: memory[zeroPageX(base: getByte())])
+                cycleDelay(cycles: 4)
+            case .aslZeroPageX:
+                let addr = zeroPageX(base: getByte())
+                memory[addr] = asl(value: memory[addr])
+                cycleDelay(cycles: 6)
+            case .clc:
+                registers.c = false
+                cycleDelay(cycles: 2)
+            case .oraAbsoluteY:
+                ora(value: memory[absoluteY(base: getWord())])
+                cycleDelay(cycles: 4)
+            case .oraAbsoluteX:
+                ora(value: memory[absoluteX(base: getWord())])
+                cycleDelay(cycles: 4)
+            case .aslAbsoluteX:
+                let addr = absoluteX(base: getWord())
+                memory[addr] = asl(value: memory[addr])
+                extraCycles = 0
+                cycleDelay(cycles: 7)
             }
         }
     

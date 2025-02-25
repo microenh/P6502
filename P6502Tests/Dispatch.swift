@@ -20,6 +20,15 @@ struct Dispatch {
     }
     
     @Test
+    mutating func getWord() {
+        p.memory[0xc000] = 0x80
+        p.memory[0xc001] = 0x40
+        p.registers.pc = 0xc000
+        #expect(p.getWord() == UInt16(0x4080))
+        #expect(p.registers.pc == 0xc002)
+    }
+    
+    @Test
     mutating func brk() {
         p.registers.pc = 0x1000
         p.memory[0x1000] = 0x00
@@ -30,7 +39,7 @@ struct Dispatch {
     }
     
     @Test
-    mutating func oraIndirectIndexed() {
+    mutating func oraIndexedIndirect() {
         p.registers.x = 0x10
         p.registers.a = 0x40
         
@@ -87,7 +96,7 @@ struct Dispatch {
     }
     
     @Test
-    mutating func oraImeediate() {
+    mutating func oraImmediate() {
         p.registers.a = 0x40
         
         p.registers.pc = 0x1000
@@ -126,7 +135,6 @@ struct Dispatch {
     
     @Test
     mutating func aslAbsolute() {
-        
         p.registers.pc = 0x1000
         p.memory[0x1000] = 0x0e
         p.memory[0x1001] = 0x80

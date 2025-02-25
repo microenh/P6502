@@ -73,4 +73,5 @@ struct Model6502 {
     
     var registers = Registers()
     
+    var extraCycles: Int = 0
 }

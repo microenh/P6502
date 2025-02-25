@@ -16,6 +16,13 @@ struct Branch {
         p.registers.pc = 0x8000
         p.branch(flag: true, offset: 0x50)
         #expect(p.registers.pc == 0x8050)
+        #expect(p.extraCycles == 1)
+
+        p.registers.pc = 0x80f0
+        p.branch(flag: true, offset: 0x50)
+        #expect(p.registers.pc == 0x8140)
+        #expect(p.extraCycles == 2)
+
         
         p.registers.pc = 0x8000
         p.branch(flag: true, offset: 0xf0)
@@ -24,6 +31,7 @@ struct Branch {
         p.registers.pc = 0x8000
         p.branch(flag: false, offset: 0xf0)
         #expect(p.registers.pc == 0x8000)
+        #expect(p.extraCycles == 0)
     }
     
     @Test

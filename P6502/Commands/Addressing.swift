@@ -24,12 +24,17 @@ extension Model6502 {
         Int(base)
     }
     
-    func absoluteX(base: UInt16) -> Int {
-        Int(UInt16(truncatingIfNeeded: Int(base) + Int(registers.x)))
+    // note: no extra cycles ASL
+    mutating func absoluteX(base: UInt16) -> Int {
+        let newAddr = Int(UInt16(truncatingIfNeeded: Int(base) + Int(registers.x)))
+        extraCycles = (newAddr & 0xff00) == (Int(base) & 0xff00) ? 0 : 1
+        return newAddr
     }
     
-    func absoluteY(base: UInt16) -> Int {
-        Int(UInt16(truncatingIfNeeded: Int(base) + Int(registers.y)))
+    mutating func absoluteY(base: UInt16) -> Int {
+        let newAddr = Int(UInt16(truncatingIfNeeded: Int(base) + Int(registers.y)))
+        extraCycles = (newAddr & 0xff00) == (Int(base) & 0xff00) ? 0 : 1
+        return newAddr
     }
     
     func indexedIndirect(base: UInt8) -> Int {
@@ -38,11 +43,23 @@ extension Model6502 {
         return Int(memory[Int(mem1)]) | (Int(addrH) << 8)
     }
     
-    func indirectIndexed(base: UInt8) -> Int {
-        Int(memory[Int(base)]) | (Int(memory[Int(base) + 1]) << 8) + Int(registers.y)
+    // note: no extra cycles for STA
+    mutating func indirectIndexed(base: UInt8) -> Int {
+        let newAddr = Int(memory[Int(base)])
+            | (Int(memory[Int(UInt8(truncatingIfNeeded: Int(base) + 1))]) << 8)
+        let ofsAddr = newAddr + Int(registers.y)
+        extraCycles = (newAddr & 0xff00) == (ofsAddr & 0xff00) ? 0 : 1
+        return ofsAddr
     }
     
-    func relative(offset: UInt8) -> UInt16 {
-        UInt16(Int(registers.pc) + Int(P6502.twosComplement(value: offset)))
+    mutating func relative(offset: UInt8) -> UInt16 {
+        if offset != 0 {
+            let new_addr = UInt16(Int(registers.pc) + Int(P6502.twosComplement(value: offset)))
+            extraCycles = (registers.pc & 0xff00) == (new_addr & 0xff00) ? 1 : 2
+            return new_addr
+        } else {
+            extraCycles = 0
+            return registers.pc
+        }
     }
 }

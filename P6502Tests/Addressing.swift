@@ -102,10 +102,12 @@ struct Addressing {
         p.memory[0x20] = 0x34
         p.memory[0x21] = 0x12
         #expect(p.indirectIndexed(base: 0x20) == 0x1244)
-
-        p.memory[0x00ff] = 0x56
-        p.memory[0x0100] = 0x34
-        #expect(p.indirectIndexed(base: 0xff) == 0x3466)
+        #expect(p.extraCycles == 0)
+ 
+        p.memory[0x00ff] = 0xff
+        p.memory[0x0000] = 0x34
+        #expect(p.indirectIndexed(base: 0xff) == 0x350f)
+        #expect(p.extraCycles == 1)
     }
     
     @Test
