@@ -51,7 +51,7 @@ struct Model6502 {
         }
         
         var flags: UInt8 {
-            get {(c ? 0x01 : 0)
+            get { (c ? 0x01 : 0)
                 | (z ? 0x02 : 0)
                 | (i ? 0x04 : 0)
                 | (d ? 0x08 : 0)
